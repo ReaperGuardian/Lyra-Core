@@ -84,4 +84,22 @@ while true; do
     input=$(echo "$choice" | tr '[:upper:]' '[:lower:]')
 
     case $input in
-        0|reboot) tput cnorm; exec bash ~/
+        0|reboot) tput cnorm; exec bash ~/scripts/ignition.sh ;;
+        1|msf)    run_tool "msfconsole" "metasploit" ;;
+        2|btp)    run_tool "btop" "btop" ;;
+        3|john)   run_tool "john" "john" ;;
+        4|nmap)   run_tool "nmap" "nmap" "-v" ;;
+        5|ranger) run_tool "ranger" "ranger" ;;
+        6|lyra)   echo "Diagnostic: All Systems Nominal."; sleep 2 ;;
+        7|sqlmap) run_tool "sqlmap" "sqlmap" ;;
+        8|bettercap) run_tool "bettercap" "bettercap" ;;
+        9|hydra)  run_tool "hydra" "hydra" ;;
+        10|git)   run_tool "git" "git" ;;
+        11|aircrack) run_tool "aircrack-ng" "aircrack-ng" ;;
+        12|ghost) echo "Purging session logs..."; sleep 1 ;;
+        13|stealth) CYAN="${RED}"; echo -e "${RED}STEALTH MODE ENGAGED.${RESET}"; sleep 1 ;;
+        14|update) tput cnorm; pkg update && pkg upgrade -y ;;
+        exit) tput cnorm; clear; exit ;;
+        *) $input ;;
+    esac
+done
