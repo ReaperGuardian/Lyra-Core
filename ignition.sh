@@ -2,7 +2,8 @@
 
 # --- ARASAKA CORE CONFIG ---
 tput civis
-trap "tput cnorm; exit" SIGINT SIGTERM
+# This ensures that when you exit, your terminal returns to normal
+trap "tput cnorm; clear; exit" SIGINT SIGTERM
 
 CYAN="\033[1;36m"
 RED="\033[1;31m"
@@ -64,42 +65,9 @@ while true; do
     echo -e "${CYAN}${MID_LINE}${RESET}"
     
     echo ""
-    printf "  ${YELLOW}%-24s${RESET} ${RED}%-24s${RESET} ${GREEN}%-24s${RESET}\n" "0) [REBOOT] Sync" "13) [STLTH] Stealth" "14) [UPD] Update"
+    printf "  ${YELLOW}%-24s${RESET} ${RED}%-24s${RESET} ${GREEN}%-24s${RESET}\n" "0) [REBOOT]" "13) [STLTH]" "14) [UPD]"
     echo -e "\n  ${DIM}-----------------------  -----------------------  -----------------------${RESET}\n"
     
-    printf "  %-24s %-24s %-24s\n" "1) [MSF] Metasploit" "5) [RNG] Ranger"     "9)  [HYD] Hydra"
-    echo ""
-    printf "  %-24s %-24s %-24s\n" "2) [BTP] Btop"       "6) [LYR] Diagnostic" "10) [GIT] Git"
-    echo ""
-    printf "  %-24s %-24s %-24s\n" "3) [JHN] John"       "7) [SQL] SQLmap"     "11) [AIR] Aircrack"
-    echo ""
-    printf "  %-24s %-24s %-24s\n" "4) [NMP] Nmap"       "8) [BET] Bettercap"  "12) [GHT] Ghost"
-    echo ""
-
-    echo -e "${CYAN}${MID_LINE}${RESET}"
-    echo -e "  ${WHITE}NODE: $IP_ADDR | PWR: ${BATT}% | TEMP: ${TEMP_DIS}°C | SIG: ${SIG}dBm${RESET}"
-    echo -e "${CYAN}${BOT_LINE}${RESET}"
-
-    read -p "  ACCESS CODE: " choice
-    input=$(echo "$choice" | tr '[:upper:]' '[:lower:]')
-
-    case $input in
-        0|reboot) tput cnorm; exec bash ~/scripts/ignition.sh ;;
-        1|msf)    run_tool "msfconsole" "metasploit" ;;
-        2|btp)    run_tool "btop" "btop" ;;
-        3|john)   run_tool "john" "john" ;;
-        4|nmap)   run_tool "nmap" "nmap" "-v" ;;
-        5|ranger) run_tool "ranger" "ranger" ;;
-        6|lyra)   echo "Diagnostic: All Systems Nominal."; sleep 2 ;;
-        7|sqlmap) run_tool "sqlmap" "sqlmap" ;;
-        8|bettercap) run_tool "bettercap" "bettercap" ;;
-        9|hydra)  run_tool "hydra" "hydra" ;;
-        10|git)   run_tool "git" "git" ;;
-        11|aircrack) run_tool "aircrack-ng" "aircrack-ng" ;;
-        12|ghost) echo "Purging session logs..."; sleep 1 ;;
-        13|stealth) CYAN="${RED}"; echo -e "${RED}STEALTH MODE ENGAGED.${RESET}"; sleep 1 ;;
-        14|update) tput cnorm; pkg update && pkg upgrade -y ;;
-        exit) tput cnorm; clear; exit ;;
-        *) $input ;;
-    esac
-done
+    printf "  %-24s %-24s %-24s\n" "1) [MSF] Metasploit" "5) [RNG] Ranger" "9) [HYD] Hydra"
+    printf "  %-24s %-24s %-24s\n" "2) [BTP] Btop" "6) [LYR] Diagnostic" "10) [GIT] Git"
+    printf "  %-24s %-24s %-24s\n" "3) [JHN] John" "7) [SQL] SQLmap" "11) [AIR] Aircrack"
